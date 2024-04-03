@@ -11,12 +11,21 @@ Make a Recurrent Neural Network model for predicting stock price using a trainin
 ## Design Steps
 
 ### Step 1:
+mport required header files
 ### Step 2:
+read the csv file using pd.read_csv
 ### Step 3:
+use minmaxscaler to set range of feature
+### Step 4:
+train the dataset
+### Step 5:
+fit the training set
+
 ## Program:
 #### Name:ALAGU NACHIYAR K
 #### Register Number:212222240006
 ```
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -24,6 +33,7 @@ from sklearn.preprocessing import MinMaxScaler
 from keras import layers
 from keras.models import Sequential
 dataset_train = pd.read_csv('trainset.csv')
+dataset_train.columns
 dataset_train.head()
 train_set = dataset_train.iloc[:,1:2].values
 type(train_set)
@@ -41,10 +51,16 @@ X_train1 = X_train.reshape((X_train.shape[0], X_train.shape[1],1))
 X_train.shape
 length = 60
 n_features = 1
+length = 60
+n_features = 1
 model = Sequential()
-model.add(layers.SimpleRNN(50,input_shape=(60,1)))
+model.add(layers.SimpleRNN(50,input_shape=(length,n_features)))
 model.add(layers.Dense(1))
-model.compile(optimizer='adam', loss='mse')
+
+model.compile(optimizer='adam',loss='mse')
+print("Alagu Nachiyar K-212222240006")
+model.summary()
+print("Alagu Nachiyar K-212222240006")
 model.summary()
 model.fit(X_train1,y_train,epochs=100, batch_size=32)
 dataset_test = pd.read_csv('testset.csv')
@@ -62,13 +78,15 @@ X_test = np.reshape(X_test,(X_test.shape[0], X_test.shape[1],1))
 X_test.shape
 predicted_stock_price_scaled = model.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price_scaled)
+print("Alagu Nachiyar K-212222240006")
 plt.plot(np.arange(0,1384),inputs, color='red', label = 'Test(Real) Google stock price')
-plt.plot(np.arange(60,1384),predicted_stock_price, color='black', label = 'Predicted Google stock price')
+plt.plot(np.arange(60,1384),predicted_stock_price, color='blue', label = 'Predicted Google stock price')
 plt.title('Google Stock Price Prediction')
 plt.xlabel('Time')
 plt.ylabel('Google Stock Price')
 plt.legend()
 plt.show()
+
 
 ```
 
